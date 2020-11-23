@@ -1,0 +1,137 @@
+{
+  "version": "Notebook/1.0",
+  "items": [
+    {
+      "type": 1,
+      "content": {
+        "json": "# New Azure Subscriptions"
+      },
+      "name": "text - 0"
+    },
+    {
+      "type": 9,
+      "content": {
+        "version": "KqlParameterItem/1.0",
+        "parameters": [
+          {
+            "id": "a61029ba-54a4-4bca-a50e-28a9da4f9b1b",
+            "version": "KqlParameterItem/1.0",
+            "name": "CreatedSince",
+            "label": "Created Since",
+            "type": 4,
+            "value": {
+              "durationMs": 86400000
+            },
+            "typeSettings": {
+              "selectableValues": [
+                {
+                  "durationMs": 300000
+                },
+                {
+                  "durationMs": 900000
+                },
+                {
+                  "durationMs": 1800000
+                },
+                {
+                  "durationMs": 3600000
+                },
+                {
+                  "durationMs": 14400000
+                },
+                {
+                  "durationMs": 43200000
+                },
+                {
+                  "durationMs": 86400000
+                },
+                {
+                  "durationMs": 172800000
+                },
+                {
+                  "durationMs": 259200000
+                },
+                {
+                  "durationMs": 604800000
+                },
+                {
+                  "durationMs": 1209600000
+                },
+                {
+                  "durationMs": 2419200000
+                },
+                {
+                  "durationMs": 2592000000
+                },
+                {
+                  "durationMs": 5184000000
+                },
+                {
+                  "durationMs": 7776000000
+                }
+              ],
+              "allowCustom": true
+            },
+            "timeContext": {
+              "durationMs": 86400000
+            }
+          },
+          {
+            "id": "ecb3ccb7-81d8-4936-a6df-d9869f9955ba",
+            "version": "KqlParameterItem/1.0",
+            "name": "Subscription",
+            "type": 6,
+            "value": "/subscriptions/5f1c1322-cebc-4ea3-8779-fac7d666e18f",
+            "typeSettings": {
+              "additionalResourceOptions": [],
+              "includeAll": false
+            },
+            "timeContext": {
+              "durationMs": 86400000
+            }
+          },
+          {
+            "id": "6ed5a190-e623-4198-b7da-cd9ddfbe8ae9",
+            "version": "KqlParameterItem/1.0",
+            "name": "Workspace",
+            "label": "LA Workspace",
+            "type": 5,
+            "query": "where type =~ 'microsoft.operationalinsights/workspaces'",
+            "crossComponentResources": [
+              "{Subscription}"
+            ],
+            "value": "/subscriptions/5f1c1322-cebc-4ea3-8779-fac7d666e18f/resourceGroups/mms-eus/providers/Microsoft.OperationalInsights/workspaces/Gov-Cloud",
+            "typeSettings": {
+              "additionalResourceOptions": []
+            },
+            "queryType": 1,
+            "resourceType": "microsoft.resourcegraph/resources"
+          }
+        ],
+        "style": "pills",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces"
+      },
+      "name": "parameters - 1"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "SubscriptionInventory_CL\r\n| where TimeGenerated  >= datetime_add(\"Day\",-1,{CreatedSince:start})\r\n| summarize arg_min(TimeGenerated, *) by SubscriptionId\r\n| where TimeGenerated {CreatedSince:query}\r\n| project TimeGenerated=format_datetime(TimeGenerated,\"MM/dd/yyyy\"), DisplayName=displayName_s, State=state_s, SubscriptionId",
+        "size": 0,
+        "noDataMessage": "No subscriptions created during that time period",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspace}"
+        ]
+      },
+      "name": "query - 2"
+    }
+  ],
+  "fallbackResourceIds": [
+    "Azure Monitor"
+  ],
+  "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json"
+}
