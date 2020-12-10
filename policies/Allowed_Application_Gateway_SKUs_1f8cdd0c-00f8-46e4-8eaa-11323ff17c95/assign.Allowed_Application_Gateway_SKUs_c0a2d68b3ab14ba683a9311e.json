@@ -1,0 +1,25 @@
+{
+ "sku": {
+  "name": "A0",
+  "tier": "Free"
+ },
+ "properties": {
+  "displayName": "Allowed Application Gateway SKUs",
+  "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/GovLab/providers/Microsoft.Authorization/policyDefinitions/1f8cdd0c-00f8-46e4-8eaa-11323ff17c95",
+  "scope": "/providers/Microsoft.Management/managementGroups/GovLab",
+  "notScopes": [],
+  "parameters": {},
+  "metadata": {
+   "assignedBy": "Brad Watts",
+   "parameterScopes": {},
+   "createdBy": "173f99e4-0250-4049-90ef-9f8f10e24760",
+   "createdOn": "2020-12-10T14:32:43.0505054Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "enforcementMode": "Default"
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/GovLab/providers/Microsoft.Authorization/policyAssignments/c0a2d68b3ab14ba683a9311e",
+ "type": "Microsoft.Authorization/policyAssignments",
+ "name": "c0a2d68b3ab14ba683a9311e"
+}

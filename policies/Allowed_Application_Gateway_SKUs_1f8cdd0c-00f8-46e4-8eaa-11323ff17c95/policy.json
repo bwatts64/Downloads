@@ -1,0 +1,61 @@
+{
+ "properties": {
+  "displayName": "Allowed Application Gateway SKUs",
+  "policyType": "Custom",
+  "mode": "Indexed",
+  "metadata": {
+   "category": "Network",
+   "createdBy": "173f99e4-0250-4049-90ef-9f8f10e24760",
+   "createdOn": "2020-12-10T14:32:02.3256424Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {
+   "effect": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Effect",
+     "description": "Enable or disable the execution of the policy"
+    },
+    "allowedValues": [
+     "Audit",
+     "Deny",
+     "Disabled"
+    ],
+    "defaultValue": "Audit"
+   },
+   "allowedSKUs": {
+    "type": "Array",
+    "metadata": {},
+    "allowedValues": [
+     "Standard_v2",
+     "WAF_v2"
+    ],
+    "defaultValue": [
+     "Standard_v2",
+     "WAF_v2"
+    ]
+   }
+  },
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Network/applicationGateways"
+     },
+     {
+      "field": "Microsoft.Network/applicationGateways/sku.tier",
+      "notIn": "[parameters('allowedSKUs')]"
+     }
+    ]
+   },
+   "then": {
+    "effect": "[parameters('effect')]"
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/GovLab/providers/Microsoft.Authorization/policyDefinitions/1f8cdd0c-00f8-46e4-8eaa-11323ff17c95",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "1f8cdd0c-00f8-46e4-8eaa-11323ff17c95"
+}
